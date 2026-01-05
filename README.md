@@ -8,7 +8,7 @@ Helper daemons and cli script to run my sketchybar setup (WIP).
 
 ## Installation
 
-### Deps:
+### 1. Deps:
 
 ```bash
 xcode-select --install
