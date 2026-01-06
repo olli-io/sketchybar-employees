@@ -1,6 +1,6 @@
 # sketchybar-employees
 
-Helper daemons and cli script to run my sketchybar setup (WIP). 
+Helper daemons and cli script to run my sketchybar setup (WIP).
 
 1. Sketchybartender (rust) handles updating all information in sketchybar.
 2. Sketchybarbouncer (swift) listens to NSWorkspace notifications to update sketchybar workspaces when an application closes or opens and relays them to sektchybartender.
@@ -8,17 +8,20 @@ Helper daemons and cli script to run my sketchybar setup (WIP).
 
 ## Installation
 
-### 1. Deps:
+### Deps:
 
 ```bash
 xcode-select --install
 ```
+
 ```bash
 brew install rust
 ```
+
 ```bash
 brew install FelixKratz/formulae/sketchybar
 ```
+
 ```bash
 brew install --cask nikitabobko/tap/aerospace
 ```
@@ -30,11 +33,25 @@ brew install --cask nikitabobko/tap/aerospace
 ```
 
 This will:
+
 - Build and install `sketchybarbouncer` (Swift daemon)
 - Build and install `sketchybartender` (Rust daemon)
 - Build and install `sketchycli` (CLI tool)
 - Copy configuration files to `~/.config/sketchybar/`
 - Backup your existing sketchybarrc if present
+
+At this point the sketchybar may be a bit empty. Add the following to aerospace.toml and run `aerospace reload-config`
+
+```
+exec-on-workspace-change = [
+    '/bin/bash', '-c',
+    'sketchycli on-workspace-changed'
+]
+
+on-focus-changed = [
+    'exec-and-forget sketchycli on-focus-changed'
+]
+```
 
 ### 3. Ensure PATH is Set
 
@@ -47,11 +64,13 @@ export PATH="$HOME/.local/bin:$PATH"
 ## What Gets Installed
 
 Binaries:
+
 - `~/.local/bin/sketchybarbouncer`
 - `~/.local/bin/sketchybartender`
 - `~/.local/bin/sketchycli`
 
 Configuration:
+
 - `~/.config/sketchybar/sketchybarrc`
 - `~/.config/sketchybar/sketchybartenderrc`
 
